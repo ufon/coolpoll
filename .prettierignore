@@ -1,0 +1,6 @@
+build/
+node_modules/
+config/
+package-lock.json
+yarn.lock
+package.json

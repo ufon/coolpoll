@@ -1,4 +1,4 @@
-const storageKey = 'coolpool-token';
+const storageKey = "coolpoll-token";
 
 export default {
   write: token => localStorage.setItem(storageKey, token),
