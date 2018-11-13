@@ -10,7 +10,7 @@ const client = new ApolloClient({
     const token = localStorage.read();
     let headers = {};
     if (token) {
-      headers = { authorization: `Token ${token}` };
+      headers = { authorization: `Bearer ${token}` };
     }
     operation.setContext({ headers });
   }

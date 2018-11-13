@@ -10,9 +10,11 @@ import AdminMenu from "../../components/Menus/Admin";
 const { Content, Sider } = Layout;
 
 const ADMIN_MENU = [
-  { id: 0, name: "Pools", icon: "notification", path: "/admin/polls" },
-  { id: 1, name: "Settings", icon: "setting", path: "/admin/settings" }
+  { id: 0, name: "Add Poll", icon: "plus", path: "/admin/poll/new" },
+  { id: 1, name: "Polls", icon: "notification", path: "/admin/poll/all" },
+  { id: 2, name: "Settings", icon: "setting", path: "/admin/settings" }
 ];
+
 class DashboardContainer extends React.Component {
   render() {
     const { match } = this.props;
@@ -28,9 +30,9 @@ class DashboardContainer extends React.Component {
                 <Route
                   exact
                   path={`${match.path}`}
-                  render={() => <Redirect to={`${match.path}/polls`} />}
+                  render={() => <Redirect to={`${match.path}/poll`} />}
                 />
-                <Route path={`${match.path}/polls`} component={Polls} />
+                <Route path={`${match.path}/poll`} component={Polls} />
                 <Route path={`${match.path}/settings`} component={Settings} />
               </Switch>
             </Content>

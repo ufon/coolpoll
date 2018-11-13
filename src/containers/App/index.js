@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import { ApolloProvider } from "react-apollo";
 
 import apolloClient from "../../utils/apolloClient";
+import PrivateRoute from "../../utils/withAuth";
 
 import Dashboard from "../Dashboard";
 import Auth from "../Auth";
@@ -19,8 +20,9 @@ const App = ({ match }) => (
       <Layout style={{ height: "100vh" }}>
         <Header />
         <Switch>
-          <Route path="/admin" component={Dashboard} />
-          <Route path="/auth" component={Auth} />
+          <PrivateRoute path="/admin" component={Dashboard} />
+          <Route exact path={"/"} render={() => <Redirect to={"/admin"} />} />
+          <Route path="/signin" component={Auth} />
           <Route path="/poll/:id" component={Poll} />
           <Route path="*" component={NotFound} />
         </Switch>

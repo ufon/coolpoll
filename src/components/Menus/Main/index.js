@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import Link from "../../Link";
 import { Menu, Button, Icon } from "antd";
 
-const MainMenu = ({ data, location }) => (
+const MainMenu = ({ data, location, onLoginClick }) => (
   <Menu
     theme="dark"
     mode="horizontal"
@@ -16,7 +16,7 @@ const MainMenu = ({ data, location }) => (
       </Menu.Item>
     ))}
     <Menu.Item style={{ marginLeft: "auto" }}>
-      <Button size="large">
+      <Button onClick={onLoginClick} size="large">
         <Icon type="github" />
         Sign in with Github
       </Button>
