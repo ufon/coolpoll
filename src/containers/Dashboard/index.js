@@ -30,7 +30,7 @@ class DashboardContainer extends React.Component {
                 <Route
                   exact
                   path={`${match.path}`}
-                  render={() => <Redirect to={`${match.path}/poll`} />}
+                  render={() => <Redirect to={`${match.path}/poll/all`} />}
                 />
                 <Route path={`${match.path}/poll`} component={Polls} />
                 <Route path={`${match.path}/settings`} component={Settings} />

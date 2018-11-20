@@ -4,25 +4,51 @@ import MainMenu from "../Menus/Main";
 
 import localStorage from "../../utils/localStorage";
 
-import React, { Component } from "react";
+import gql from "graphql-tag";
+
+import React, { Component, Fragment } from "react";
+
+import { Query } from "react-apollo";
+
+import { withRouter, Redirect } from "react-router-dom";
 
 const MAIN_MENU = [
   { id: 0, name: "About", path: "/about" },
   { id: 1, name: "Github", path: "https://github.com" }
 ];
 
+const GET_PROFILE = gql`
+  {
+    user {
+      id
+      email
+      profile {
+        name
+        github_username
+        avatar
+      }
+    }
+  }
+`;
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuthenticated: !!localStorage.read()
+    };
+  }
+
   componentDidMount() {
     window.addEventListener("message", this.listener);
-
-    // if (this.props.auth.isAuthenticated) {
-    //   this.props.goDashboard();
-    // }
   }
 
   listener = ({ origin, data }) => {
     if (origin !== process.env.REACT_APP_URL) return;
-    if (data.token) localStorage.write(data.token);
+    if (data.token) {
+      localStorage.write(data.token);
+      this.setState({ isAuthenticated: true });
+      this.props.history.push("/admin");
+    }
   };
 
   openPopup = url => {
@@ -39,15 +65,45 @@ class Header extends Component {
   };
 
   render() {
+    const { isAuthenticated } = this.state;
     return (
       <Layout.Header>
-        <MainMenu
-          onLoginClick={() => this.openPopup("/auth/github")}
-          data={MAIN_MENU}
-        />
+        {isAuthenticated ? (
+          <Query query={GET_PROFILE}>
+            {({ loading, error, data }) => {
+              if (loading) return "Loading...";
+              if (error) {
+                this.setState({ isAuthenticated: false });
+                localStorage.delete();
+                return <Redirect to="/signin" />;
+              }
+              return (
+                <Fragment>
+                  {data.user && (
+                    <MainMenu
+                      onLoginClick={() => this.openPopup("/auth/github")}
+                      onLogoutClick={() => {
+                        this.setState({ isAuthenticated: false });
+                        localStorage.delete();
+                        this.props.history.push("/signin");
+                      }}
+                      data={MAIN_MENU}
+                      user={data.user.profile}
+                    />
+                  )}
+                </Fragment>
+              );
+            }}
+          </Query>
+        ) : (
+          <MainMenu
+            onLoginClick={() => this.openPopup("/auth/github")}
+            data={MAIN_MENU}
+          />
+        )}
       </Layout.Header>
     );
   }
 }
 
-export default Header;
+export default withRouter(Header);

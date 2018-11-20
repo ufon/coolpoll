@@ -1,4 +1,4 @@
-const storageKey = "coolpoll-token";
+const storageKey = "jwt";
 
 export default {
   write: token => localStorage.setItem(storageKey, token),

@@ -1,8 +1,7 @@
 import ApolloClient from "apollo-boost";
 import localStorage from "./localStorage";
 
-const GRAPHQL_URL =
-  process.env.REACT_APP_GRAPHQL_URL || "http://localhost:4000/graphql";
+const GRAPHQL_URL = `${process.env.REACT_APP_GRAPHQL_URL}/api/graphql`;
 
 const client = new ApolloClient({
   uri: GRAPHQL_URL,
