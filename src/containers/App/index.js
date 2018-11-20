@@ -17,7 +17,7 @@ import Footer from "../../components/Footer";
 const App = ({ match }) => (
   <BrowserRouter>
     <ApolloProvider client={apolloClient}>
-      <Layout style={{ height: "100vh" }}>
+      <Layout style={{ minHeight: "100vh" }}>
         <Header />
         <Switch>
           <PrivateRoute path="/admin" component={Dashboard} />
