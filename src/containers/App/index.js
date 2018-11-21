@@ -23,7 +23,7 @@ const App = ({ match }) => (
           <PrivateRoute path="/admin" component={Dashboard} />
           <Route exact path={"/"} render={() => <Redirect to={"/admin"} />} />
           <Route path="/signin" component={Auth} />
-          <Route path="/poll/:id" component={Poll} />
+          <PrivateRoute path="/poll/:id" component={Poll} />
           <Route path="*" component={NotFound} />
         </Switch>
         <Footer />

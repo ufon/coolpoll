@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import SortableList from "../../../../components/SortableList";
+import notify from "../../../../utils/notifications";
 import nanoid from "nanoid";
 import { Button, Input } from "antd";
 import gql from "graphql-tag";
@@ -51,7 +52,6 @@ class NewPoll extends Component {
   };
 
   handleAnswerChange = e => {
-    console.log(e.target.value);
     this.setState({
       answer: e.target.value
     });
@@ -61,7 +61,7 @@ class NewPoll extends Component {
     const { options, answer, question, order } = this.state;
     return (
       <Mutation mutation={ADD_POLL}>
-        {(createPoll, { data }) => (
+        {(createPoll, { loading, error }) => (
           <Fragment>
             <Input
               placeholder="Poll question"
@@ -83,13 +83,19 @@ class NewPoll extends Component {
             />
             <Button
               onClick={async () => {
-                const { data: poll } = await createPoll({
-                  variables: {
-                    question,
-                    options: options.map(e => ({ value: e.value }))
-                  }
-                });
-                console.log(poll);
+                try {
+                  const { data: poll } = await createPoll({
+                    variables: {
+                      question,
+                      options: options.map(e => ({ value: e.value }))
+                    }
+                  });
+                  notify("success", "Poll was successfully created!", "");
+                  console.log(poll);
+                } catch (e) {
+                  console.log(e.message);
+                  notify("error", "Bad request 500", e.message);
+                }
               }}
               style={{ margin: "20px 0" }}
             >
