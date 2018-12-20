@@ -32,10 +32,12 @@ class EditPoll extends Component {
       <Query
         query={GET_POLL_BY_ID}
         variables={{ id: this.props.match.params.id }}
+        pollInterval={1500}
       >
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+          if (data.poll.published) return "Poll is published!";
           return (
             <Mutation mutation={UPDATE_POLL}>
               {(updatePoll, { loading, error }) => (

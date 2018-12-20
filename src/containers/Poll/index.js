@@ -16,6 +16,7 @@ const GET_POLL_BY_ID = gql`
     poll(id: $id) {
       id
       answer
+      published
       author {
         profile {
           name
@@ -78,7 +79,7 @@ class PollPage extends Component {
             {({ loading, error, data }) => {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
-
+              if (!data.poll.published) return `Poll is not published :(`;
               return (
                 <Row style={{ width: "100%" }} gutter={16}>
                   <Col lg={12} md={24}>
