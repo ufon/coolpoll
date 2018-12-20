@@ -3,16 +3,16 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import { ApolloProvider } from "react-apollo";
 
-import apolloClient from "../../utils/apolloClient";
-import PrivateRoute from "../../utils/withAuth";
+import apolloClient from "utils/apolloClient";
+import PrivateRoute from "utils/withAuth";
 
-import Dashboard from "../Dashboard";
-import Auth from "../Auth";
-import Poll from "../Poll";
+import Dashboard from "containers/Dashboard";
+import Auth from "containers/Auth";
+import Poll from "containers/Poll";
 import NotFound from "../NotFound";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const App = ({ match }) => (
   <BrowserRouter>

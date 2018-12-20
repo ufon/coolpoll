@@ -4,15 +4,16 @@ import { Layout } from "antd";
 
 import Polls from "./Polls";
 import Settings from "./Settings";
-
-import AdminMenu from "../../components/Menus/Admin";
+import Groups from "./Groups";
+import AdminMenu from "components/Menus/Admin";
 
 const { Content, Sider } = Layout;
 
 const ADMIN_MENU = [
   { id: 0, name: "Add Poll", icon: "plus", path: "/admin/poll/new" },
-  { id: 1, name: "Polls", icon: "notification", path: "/admin/poll/all" },
-  { id: 2, name: "Settings", icon: "setting", path: "/admin/settings" }
+  { id: 1, name: "Groups", icon: "notification", path: "/admin/groups" },
+  { id: 2, name: "Polls", icon: "notification", path: "/admin/poll/all" },
+  { id: 3, name: "Settings", icon: "setting", path: "/admin/settings" }
 ];
 
 class DashboardContainer extends React.Component {
@@ -33,6 +34,7 @@ class DashboardContainer extends React.Component {
                   render={() => <Redirect to={`${match.path}/poll/all`} />}
                 />
                 <Route path={`${match.path}/poll`} component={Polls} />
+                <Route path={`${match.path}/groups`} component={Groups} />
                 <Route path={`${match.path}/settings`} component={Settings} />
               </Switch>
             </Content>

@@ -34,13 +34,18 @@ const UserMenu = styled.div`
   }
 `;
 
-const UserWithAvatar = ({ avatar, fullName, userName, onLogout }) => {
+const UserWithAvatar = ({
+  avatar,
+  fullName,
+  userName,
+  onLogout,
+  onMyPolls
+}) => {
   return (
     <Container>
       <Popover
         content={
           <UserMenu>
-            <Button onClick={onLogout}>My polls</Button>
             <Button onClick={onLogout}>Logout</Button>
           </UserMenu>
         }

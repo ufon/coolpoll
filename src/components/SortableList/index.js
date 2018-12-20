@@ -152,7 +152,8 @@ export default class SortableList extends React.Component {
                             e.target.value
                           )
                         }
-                        placeholder={`${option.id} Enter poll option here`}
+                        value={option.value}
+                        placeholder={`Enter poll option here`}
                         size="large"
                       />
                       <Button

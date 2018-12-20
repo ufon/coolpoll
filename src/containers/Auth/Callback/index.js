@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-
+import { Row, Card, Col } from "antd";
 class CallbackPage extends Component {
+  state = {
+    error: false
+  };
+
   componentWillMount() {
     try {
       const { token } = this.props.match.params;
@@ -12,7 +16,15 @@ class CallbackPage extends Component {
     }
   }
   render() {
-    return <div>Success</div>;
+    return (
+      <Row type="flex" style={{ margin: "50px 0" }} justify="center">
+        <Col xs={24} md={12}>
+          <Card title="Callback">
+            <h1>{this.state.error ? "Error" : "Success"}</h1>
+          </Card>
+        </Col>
+      </Row>
+    );
   }
 }
 

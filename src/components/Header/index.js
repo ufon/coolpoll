@@ -47,7 +47,12 @@ class Header extends Component {
     if (data.token) {
       localStorage.write(data.token);
       this.setState({ isAuthenticated: true });
-      this.props.history.push("/admin");
+      let redirect = sessionStorage.getItem("auth:redirect");
+      if (redirect) {
+        this.props.history.push(redirect);
+      } else {
+        this.props.history.push("/admin");
+      }
     }
   };
 
