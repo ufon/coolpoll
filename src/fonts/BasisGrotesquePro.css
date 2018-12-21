@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Basis Grotesque Pro Mono';
+    src: url('BasisGrotesquePro-Mono.woff2') format('woff2'),
+        url('BasisGrotesquePro-Mono.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Basis Grotesque Pro';
+    src: url('BasisGrotesquePro-Bold.woff2') format('woff2'),
+        url('BasisGrotesquePro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Basis Grotesque Pro';
+    src: url('BasisGrotesquePro-Black.woff2') format('woff2'),
+        url('BasisGrotesquePro-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Basis Grotesque Pro';
+    src: url('BasisGrotesquePro-Light.woff2') format('woff2'),
+        url('BasisGrotesquePro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
